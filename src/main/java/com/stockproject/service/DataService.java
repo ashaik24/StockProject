@@ -1,5 +1,7 @@
 package com.stockproject.service;
 
+import com.stockproject.objects.StockPurchase;
+import com.stockproject.objects.UserTransactionInformation;
 import com.stockproject.repository.*;
 import com.stockproject.entities.*;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,6 +14,9 @@ import java.time.temporal.ChronoField;
 import java.util.*;
 
 @Service
+/**
+ * Service class to handle all stocks related logic and crud operation calls
+ */
 public class DataService {
 
     private final AdminStockRepository adminStockRepository;
@@ -80,7 +85,7 @@ public class DataService {
         return returnList;
     }
 
-    public UserTransactions sellOrBuyStock(StockPurchase stockPurchase,boolean isSelling){
+    public UserTransactions sellOrBuyStock(StockPurchase stockPurchase, boolean isSelling){
         ScheduledTransaction sTransaction = new ScheduledTransaction();
         sTransaction.setIsSelling(isSelling);
         sTransaction.setStockDetails(adminStockRepository.findByStockId(stockPurchase.getStockId()));
@@ -187,6 +192,10 @@ public class DataService {
 
     public List<ScheduledTransaction> getAllScheduledTransactions() {
         return (List<ScheduledTransaction>) scheduledTransactionRepository.findAll();
+    }
+
+    public List<ScheduledTransaction> getAllValidScheduledTransactions() {
+        return (List<ScheduledTransaction>) scheduledTransactionRepository.findAllValidTransactions();
     }
 
     public List<ScheduledTransaction> getUserScheduledTransactions(String userid)

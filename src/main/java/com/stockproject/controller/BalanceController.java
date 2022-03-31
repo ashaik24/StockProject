@@ -1,7 +1,7 @@
 package com.stockproject.controller;
 
 
-import com.stockproject.entities.AddMoney;
+import com.stockproject.objects.AddMoney;
 import com.stockproject.entities.BalanceTransaction;
 import com.stockproject.service.BalanceService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,6 +10,9 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @CrossOrigin(origins = "http://localhost:4200")
+/**
+ * Handles user balance related calls
+ */
 public class BalanceController {
     private BalanceService balanceService;
 

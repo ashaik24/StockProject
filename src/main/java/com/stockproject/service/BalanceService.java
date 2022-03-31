@@ -1,9 +1,8 @@
 package com.stockproject.service;
 
-import com.stockproject.StockProjectApplication;
 import com.stockproject.repository.BalanceRepository;
 import com.stockproject.repository.UserRepository;
-import com.stockproject.entities.AddMoney;
+import com.stockproject.objects.AddMoney;
 import com.stockproject.entities.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -12,6 +11,9 @@ import com.stockproject.entities.BalanceTransaction;
 import java.util.Date;
 
 @Service
+/**
+ * Service class to handle all balance related logic and crud operations calls
+ */
 public class BalanceService {
     private final BalanceRepository balanceRepository;
     private final UserRepository registrationRepository;

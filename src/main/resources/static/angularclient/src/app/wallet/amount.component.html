@@ -37,7 +37,7 @@
   <div class="modal-body">
     <form (ngSubmit)="withDrawMoney()">
       <div class="alert alert-danger" role="alert" [hidden]="!hasError">
-        This is a danger alert—check it out!
+        You do not have enough funds to withdraw.
       </div>
       <div class="form-group" >
         <label for="amount">Enter the Amount</label>

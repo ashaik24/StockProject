@@ -20,4 +20,7 @@ public interface ScheduledTransactionRepository extends CrudRepository<Scheduled
     @Query("select st from ScheduledTransaction st where st.id= :id")
     public ScheduledTransaction findByTransactionId(@Param("id") long id);
 
+    @Query("select st from ScheduledTransaction st where st.dateCompleted is null and st.dateCancelled is null ")
+    public List<ScheduledTransaction> findAllValidTransactions();
+
 }

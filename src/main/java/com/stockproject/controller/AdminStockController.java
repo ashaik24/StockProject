@@ -15,6 +15,9 @@ import java.util.*;
 
 @RestController
 @CrossOrigin(origins = "http://localhost:4200")
+/**
+ * Handles all the admin related activities
+ */
 public class AdminStockController {
 
     private AdminStockService adminStockService;

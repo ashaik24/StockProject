@@ -1,4 +1,4 @@
-package com.stockproject.entities;
+package com.stockproject.objects;
 
 import lombok.Getter;
 import lombok.Setter;

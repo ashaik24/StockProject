@@ -1,5 +1,6 @@
-package com.stockproject.entities;
+package com.stockproject.objects;
 
+import com.stockproject.entities.ScheduledTransaction;
 import com.sun.istack.NotNull;
 import lombok.Getter;
 import lombok.Setter;

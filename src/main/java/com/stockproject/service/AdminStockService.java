@@ -8,6 +8,9 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 @Service
+/**
+ * Service class to handle all admin related logic and crud operation calls
+ */
 public class AdminStockService {
 
     private final AdminStockRepository adminStockRepository;

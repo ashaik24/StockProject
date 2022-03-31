@@ -1,7 +1,9 @@
 package com.stockproject.controller;
 
-import com.stockproject.StockProjectApplication;
 import com.stockproject.entities.*;
+import com.stockproject.objects.ScheduledTransactionClientObject;
+import com.stockproject.objects.StockPurchase;
+import com.stockproject.objects.UserTransactionInformation;
 import com.stockproject.repository.AdminStockRepository;
 import com.stockproject.service.DataService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,6 +15,9 @@ import java.util.List;
 
 @RestController
 @CrossOrigin(origins = "http://localhost:4200")
+/**
+ * Handles all the stock related transactions for the user.
+ */
 public class UserStockController {
     private DataService dataService;
     private AdminStockRepository adminStockRepository;
