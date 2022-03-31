@@ -32,11 +32,6 @@ public class DataService {
         this.marketHoursRepository=marketHoursRepository;
     }
 
-    public List<StockDetails> save(StockDetails stockDetails){
-        stockDetails.setTargetPrice(stockDetails.getInitialPrice());
-        adminStockRepository.save(stockDetails);
-        return adminStockRepository.findAll();
-    }
 
     public List<StockDetails> getStocks(){
         return adminStockRepository.findAll();
@@ -111,13 +106,7 @@ public class DataService {
          return userTransactionsRepository.findAllByUser(getUserDetails(username));
     }
 
-    public MarketHours getMarketHours(){
-        return marketHoursRepository.findTop();
-    }
 
-    public MarketHours updateMarketHours(MarketHours marketHours){
-        return marketHoursRepository.save(marketHours);
-    }
 
     public boolean inScheduledTime(){
         if(marketHoursRepository.findTop() == null)
