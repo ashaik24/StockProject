@@ -1,0 +1,26 @@
+:host {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+#divider
+{
+  border-collapse: collapse;
+  border: 5px solid #3f51b5;
+}
+
+.transactionButtons
+{
+  display: inline-block;
+  vertical-align: top;
+}
+
+.space{
+  width: 4px;
+  height: auto;
+  display: inline-block;
+}
+.price{
+  min-width: 150px;
+}

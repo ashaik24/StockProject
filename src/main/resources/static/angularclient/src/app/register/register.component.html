@@ -1,0 +1,41 @@
+<mat-toolbar>
+  <span>Registration</span>
+</mat-toolbar>
+<mat-card class="my-card">
+  <mat-card-content>
+    <form class="my-form" (ngSubmit)="registerUser()" >
+      <mat-form-field class="full-width">
+        <mat-label>Full Name</mat-label>
+        <input  matInput  placeholder="Full name" [(ngModel)]="user.name" name="fullname" required>
+      </mat-form-field>
+      <mat-form-field class="full-width">
+        <mat-label>User Name</mat-label>
+        <input  matInput  placeholder="User Name" name="username"
+                [(ngModel)]="user.username" id="username" required>
+      </mat-form-field>
+
+      <mat-form-field class="full-width">
+        <mat-label>Email</mat-label>
+        <input  matInput  placeholder="Email" name="email" type="email" required [(ngModel)]="user.email" id="email">
+      </mat-form-field>
+
+      <mat-form-field class="full-width">
+        <mat-label>Password</mat-label>
+        <input  matInput  placeholder="Password" name="password" type="password" [(ngModel)]="password" id="password">
+      </mat-form-field>
+
+      <mat-form-field class="full-width">
+        <mat-label>Password</mat-label>
+        <input  matInput  placeholder="Retype Password" name="password" type="password" [(ngModel)]="retype" id="re-password">
+      </mat-form-field>
+
+      <section class="example-section">
+        <mat-checkbox name="isAdmin" class="example-margin" [(ngModel)]="user.admin" >is Admin?</mat-checkbox>
+      </section>
+
+      <button mat-raised-button type="submit"  color="primary">REGISTER</button>
+
+    </form>
+  </mat-card-content>
+
+</mat-card>

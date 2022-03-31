@@ -1,0 +1,18 @@
+<mat-toolbar class="app-toolbar" color="primary">
+  <mat-toolbar-row>
+    <!--  <span>HOME</span> -->
+    <h3>Stock Trading</h3>
+    <span class="spacer"></span>
+    <a mat-button routerLink="/register" routerLinkActive="active"  *ngIf="!utilityService.isLoggedIn()">Register</a>
+    <a mat-button routerLink="/login" routerLinkActive="active"  *ngIf="!utilityService.isLoggedIn()">Login</a>
+    <a mat-button routerLink="/userDashboard" routerLinkActive="active"  *ngIf="utilityService.isLoggedIn()">Dashboard</a>
+    <a mat-button routerLink="/addStock" routerLinkActive="active" *ngIf=" utilityService.isAdmin()">Stock Management</a>
+    <a mat-button routerLink="/balance" routerLinkActive="active"  *ngIf="utilityService.isUser()">Balance</a>
+    <a mat-button routerLink="/scheduleTransactions" routerLinkActive="active" *ngIf="utilityService.isUser()">Scheduled Transactions</a>
+    <a mat-button routerLink="/userProfile" routerLinkActive="active" *ngIf="utilityService.isUser()">Profile</a>
+    <a mat-button href="javascript:void(0)" (click)="logout()" *ngIf="utilityService.isLoggedIn()">Logout</a>
+  </mat-toolbar-row>
+</mat-toolbar>
+<div class="app-mainpage">
+  <router-outlet ></router-outlet>
+</div>

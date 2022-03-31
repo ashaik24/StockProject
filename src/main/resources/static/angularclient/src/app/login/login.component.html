@@ -1,0 +1,22 @@
+<mat-toolbar>
+  <span>LOGIN</span>
+</mat-toolbar>
+<mat-card class="my-card">
+  <mat-card-content>
+    <form class="my-form" (ngSubmit)="login()">
+      <mat-form-field class="full-width">
+        <mat-label>User Name</mat-label>
+        <input required  matInput  placeholder="User Name" name="username" [(ngModel)]="user.username">
+      </mat-form-field>
+      <mat-form-field class="full-width">
+        <mat-label>Password</mat-label>
+        <input required  matInput  placeholder="Password" type="password" name="password" [(ngModel)]="user.password">
+      </mat-form-field>
+      <section class="example-section">
+        <mat-checkbox name="isAdmin" class="example-margin" [(ngModel)]="user.admin" [checked]="user.admin" >Login as Admin?</mat-checkbox>
+      </section>
+
+      <button mat-raised-button type="submit" color="primary">LOGIN</button>
+    </form>
+  </mat-card-content>
+</mat-card>

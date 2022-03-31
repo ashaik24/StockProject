@@ -1,0 +1,15 @@
+<h1 mat-dialog-title>{{data.title}}</h1>
+<div mat-dialog-content>
+  <p>{{data.content}}</p>
+</div>
+<div mat-dialog-actions class="row">
+  <div class="col-sm-2">
+  <button mat-raised-button [ngClass]="{'delete-button':data.yesValue != null}" (click)="onNoClick()">{{data.noValue}}</button>
+  </div>
+  <div class="col-sm-6">
+
+  </div>
+  <div clas="col-sm-2">
+  <button mat-raised-button *ngIf="data.yesValue != null"  (click)="onYesClick()">{{data.yesValue}}</button>
+  </div>
+</div>

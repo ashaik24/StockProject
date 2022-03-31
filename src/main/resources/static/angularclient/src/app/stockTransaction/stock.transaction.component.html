@@ -1,0 +1,42 @@
+<h4> Stock to {{getSellorBuy()}} </h4>
+<span *ngIf="currentStock == null">No stock is selected!!</span>
+<form *ngIf="currentStock != null" (ngSubmit)="buyStock()">
+  <label>Stock Details</label>
+  <div class="form-group" >
+    <label for="companyName">Company Name :  </label>
+    <b><label id="companyName"> {{currentStock.companyName}}</label></b>
+  </div>
+  <div class="form-group" >
+    <label for="stockTicker">Stock Ticker : </label>
+    <b><label id="stockTicker"> {{currentStock.stockTicker}}</label></b>
+  </div>
+  <div class="form-group" >
+    <label for="volume">Volume : </label>
+    <b><label id="volume"> {{currentStock.volume}}</label></b>
+  </div>
+  <div class="form-group" >
+    <label for="initialPrice">Current price : </label>
+    <b><label id="initialPrice"> {{currentPrice | number:'1.3-3' | currency:'USD'}}</label></b>
+  </div>
+
+  <div class="form-group" >
+    <label for="stockUnits">Enter Number of Stock units you want to {{getSellorBuy()}}:</label>
+    <input type="number" min="0" class="form-control"  id="stockUnits" name="stockUnits" [(ngModel)]="units">
+  </div>
+  <section class="example-section">
+    <mat-checkbox name="toSchedule" class="example-margin" [(ngModel)]="scheduleThis" [checked]="scheduleThis" >Schedule this purchase?</mat-checkbox>
+  </section>
+<section *ngIf="scheduleThis">
+
+  <div class="form-group" >
+    <label for="stockDesiredPrice">Enter the desired price for the stock when you want to {{getSellorBuy()}}:</label>
+    <input type="text" class="form-control" matInput required id="stockDesiredPrice" name="stockDesiredPrice" [(ngModel)]="desiredPrice">
+  </div>
+
+  <div class="form-group" >
+    <label for="expiryDate">Enter the expiry date for this schedule:</label>
+    <input matInput type="datetime-local"  class="form-control" matInput required id="expiryDate" name="expiryDate" [(ngModel)]="expiry">
+  </div>
+</section>
+  <button type="submit" class="btn btn-primary" [disabled]="!canBuy()">{{getSellorBuy()}} Stock</button>
+</form>

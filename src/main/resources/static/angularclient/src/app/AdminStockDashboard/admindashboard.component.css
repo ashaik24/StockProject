@@ -1,0 +1,12 @@
+:host {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+
+.stock-time
+{
+  border-collapse: collapse;
+  border: 5px solid #3f51b5;
+}

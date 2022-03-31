@@ -1,0 +1,40 @@
+<h3>Stock Activity time</h3>
+<form (ngSubmit)="updateMarketHours()">
+  <div class="form-group">
+    <mat-form-field appearance="fill">
+      <mat-label>Stock Start Time</mat-label>
+
+      <!-- The timepicker input -->
+      <input matTimepicker #startTimePicker="matTimepicker" #startTimeValue="ngModel"
+             [strict]="false" id="startTimePicker" mode="24h" [(ngModel)]="marketHours.startTime"
+             placeholder="Please select start time..." name="startTime" >
+
+      <!-- An icon for the timepicker input that will open the timepicker dialog when clicked -->
+      <mat-icon matSuffix (click)="startTimePicker.showDialog()"><span class="material-icons">
+      schedule
+      </span>
+      </mat-icon>
+
+      <!-- Error that will be shown when the input date is invalid -->
+      <mat-error *ngIf="startTimeValue.touched && startTimeValue.invalid">Invalid Date</mat-error>
+    </mat-form-field>
+    <mat-form-field appearance="fill">
+      <mat-label>Stock End Time</mat-label>
+
+      <input matTimepicker #endTimePicker="matTimepicker" #endTimeValue="ngModel"
+             [strict]="false" id="endTimepicker" mode="24h" [(ngModel)]="marketHours.endTime"
+             placeholder="Please select end time..." name="endTime" >
+
+      <mat-icon matSuffix (click)="endTimePicker.showDialog()"><span class="material-icons">
+schedule
+</span></mat-icon>
+
+      <!-- Error that will be shown when the input date is invalid -->
+      <mat-error *ngIf="endTimeValue.touched && endTimeValue.invalid">Invalid Date</mat-error>
+    </mat-form-field>
+    <div>
+      <button mat-raised-button type="submit" color="primary">Update</button>
+    </div>
+  </div>
+</form>
+
