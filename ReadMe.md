@@ -1,15 +1,17 @@
 Deployment Process: 
 1. Clone the repository from https://github.com/ashaik24/StockProject.git.
-2. Run MySQL server on your local machine. 
-3. Below are the username and password configured in the project for MySQl:
+2. Install Node.js (If you donot have one on your local machine)
+3. Run npm install --force in the StockProject root folder. This will install all the required npm packages.
+4. Run MySQL server on your local machine. Create a schema named 'StockProject' on your localhost.
+5. Below are the username and password configured in the project for MySQl:
    Username: root
    Password: root
-4. Change the credentials if this doesn't match your MySQL server credentials in application.properties file available in src/main/resources folder.
-5. After first build is done change spring.jpa.hibernate.ddl-auto=create to update in application.properties file to avoid missing database data on every build. 
-6. Run 'mvn clean package' command to build the package. 
-7. From the terminal run 'cd target' command to move into the target folder generated.
-8. Run command 'java -jar StockProject-0.0.1-SNAPSHOT.jar' in the terminal. 
-9. Once the server starts on localhost:8080 open 'http://localhost:8080/' url in the browser.
+6. Change the credentials if this doesn't match your MySQL server credentials in application.properties file available in src/main/resources folder.
+7. Run 'mvn clean package' command to build the package. 
+8. From the terminal run 'cd target' command to move into the target folder generated.
+9. Run command 'java -jar StockProject-0.0.1-SNAPSHOT.jar' in the terminal. 
+10. Once the server starts on localhost:8080 open 'http://localhost:8080/' url in the browser.
+11. In case you face issues with Java version use Java SDK 17
 
 Key components:
 
