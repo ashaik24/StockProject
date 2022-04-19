@@ -26,10 +26,6 @@ public class BalanceController {
         return balanceService.addMoney(addMoney);
     }
 
-    @GetMapping(value = "getUserBalance/{id}")
-    public float getUserBalance(@PathVariable("id") String username){
-        return balanceService.getAvailableCash(username);
-    }
 
     @PostMapping(value="withDrawMoney",consumes = MediaType.APPLICATION_JSON_VALUE)
     public BalanceTransaction withDrawMoney(@RequestBody AddMoney addMoney){

@@ -1,29 +1,29 @@
 <table class="table">
   <tr>
     <td>
-<table class="table">
-  <thead>
-  <tr>
-    <th scope="col">Id</th>
-    <th scope="col">Stock Name</th>
-    <th scope="col">Price</th>
-    <th scope="col">Units Available</th>
-    <th scope="col">Action</th>
-  </tr>
-  </thead>
-  <tbody>
-  <tr *ngFor="let userStock of userStocks; index as i">
-    <th scope="row">{{i+1}}</th>
-    <th>{{userStock.companyName}}</th>
-    <td>{{userStock.stockPrice | number:'1.3-3'}}
-      <span class="material-icons" style="color:green" *ngIf="userStock.increase">arrow_drop_up</span>
-      <span class="material-icons" style="color:red" *ngIf="!userStock.increase">arrow_drop_down</span>
-    </td>
-    <td>{{userStock.units}}</td>
-    <td><button mat-raised-button (click)="sellStock(userStock)" >Sell Stock</button></td>
-  </tr>
-  </tbody>
-</table>
+      <table class="table">
+        <thead>
+        <tr>
+          <th scope="col">Id</th>
+          <th scope="col">Stock Name</th>
+          <th scope="col">Price</th>
+          <th scope="col">Units Available</th>
+          <th scope="col">Action</th>
+        </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let userStock of userStocks; index as i">
+            <th scope="row">{{i+1}}</th>
+            <th>{{userStock.companyName}}</th>
+            <td>{{userStock.stockPrice | number:'1.3-3'}}
+              <span class="material-icons" style="color:green" *ngIf="userStock.increase">arrow_drop_up</span>
+              <span class="material-icons" style="color:red" *ngIf="!userStock.increase">arrow_drop_down</span>
+            </td>
+            <td>{{userStock.units}}</td>
+            <td><button mat-raised-button (click)="sellStock(userStock)" >Sell Stock</button></td>
+          </tr>
+        </tbody>
+      </table>
     </td>
     <td id="divider">
       <stock-transaction (currentStockChanged)="updateCurrentStock($event)" [currentStock]="currentStock" [toSell]="true"></stock-transaction>

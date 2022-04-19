@@ -6,7 +6,7 @@ import {UtilityService} from "../services/utility.service";
 @Component({
   selector: 'user-amount',
   templateUrl: 'amount.component.html',
-  styleUrls:['../UserDashboard/user.dashboard.component.css']
+  styleUrls:['../userDashboard/user.dashboard.component.css']
 })
 export class AmountComponent implements OnInit{
   modalRef!: BsModalRef;
@@ -31,7 +31,7 @@ export class AmountComponent implements OnInit{
   }
 
   withDrawMoney(){
-    if(this.availableBalance<this.withDrawAmount){
+    if(this.availableBalance < this.withDrawAmount){
       this.hasError=true;
     }else{
       this.hasError=false;
@@ -49,16 +49,14 @@ export class AmountComponent implements OnInit{
 
   getCurrentBalance()
   {
-    this.dataService.getUserBalance(this.utilityService.getUser()).subscribe(
+    this.dataService.userBalanceObserver.subscribe(
       (response) => {
         this.availableBalance = <any>response;
       })
   }
 
   ngOnInit(): void {
-    setInterval(()=> {
-      this.getCurrentBalance();
-    }, 1000);
+      this.getCurrentBalance();;
   }
 
 }

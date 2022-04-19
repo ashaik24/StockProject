@@ -1,17 +1,14 @@
-import {Component, OnInit, TemplateRef} from "@angular/core";
-import {Stock} from "../classes/Stock";
-import {HttpClient, HttpHeaders} from "@angular/common/http";
-import {Router} from "@angular/router";
+import {Component, OnInit} from "@angular/core";
+import {Stock} from "../dataObjects/Stock";
 import {BsModalRef, BsModalService} from "ngx-bootstrap/modal";
-import {UserTransaction} from "../classes/UserTransaction";
-import {User} from "../classes/User";
+import {UserTransaction} from "../dataObjects/UserTransaction";
 import {DataService} from "../services/data.service";
 import {UtilityService} from "../services/utility.service";
 
 @Component({
   selector: 'my-stock',
   templateUrl: 'my.stock.details.html',
-  styleUrls: ['../UserDashboard/user.dashboard.component.css'],
+  styleUrls: ['../userDashboard/user.dashboard.component.css'],
 })
 export class MyStockDetails implements OnInit{
   userStocks!:UserTransaction[];

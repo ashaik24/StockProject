@@ -7,9 +7,7 @@ import com.stockproject.entities.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.time.DayOfWeek;
-import java.time.LocalDate;
-import java.time.LocalTime;
+import java.time.*;
 import java.time.temporal.ChronoField;
 import java.util.*;
 
@@ -25,9 +23,11 @@ public class DataService {
     private final BalanceRepository balanceRepository;
     private final ScheduledTransactionRepository scheduledTransactionRepository;
     private final MarketHoursRepository marketHoursRepository;
+
     @Autowired
     public DataService(AdminStockRepository adminStockRepository, UserTransactionsRepository userTransactionsRepository,
-                       UserRepository registrationRepository, BalanceRepository balanceRepository,ScheduledTransactionRepository scheduledTransactionRepository,
+                       UserRepository registrationRepository, BalanceRepository balanceRepository,
+                       ScheduledTransactionRepository scheduledTransactionRepository,
                        MarketHoursRepository marketHoursRepository) {
         this.adminStockRepository = adminStockRepository;
         this.userTransactionsRepository = userTransactionsRepository;
@@ -111,13 +111,16 @@ public class DataService {
          return userTransactionsRepository.findAllByUser(getUserDetails(username));
     }
 
-
-
     public boolean inScheduledTime(){
         if(marketHoursRepository.findTop() == null)
             return  true;
+
         LocalTime startTime = marketHoursRepository.findTop().GetLocalStartTime();
         LocalTime endTime = marketHoursRepository.findTop().GetLocalEndTime();
+        if(startTime.isAfter(endTime))
+        {
+            System.out.println("Give Start time is after end time");
+        }
         LocalTime currentTIme = LocalTime.now();
         return !isWeekend() && (currentTIme.isAfter(startTime) && currentTIme.isBefore(endTime));
     }
@@ -145,13 +148,7 @@ public class DataService {
             }
             //Add user transaction
             UserTransactions userTransactions = new UserTransactions();
-            userTransactions.setUser(sTransaction.getUser());
-            userTransactions.setTransactionDate(new Date());
-            userTransactions.setStockPrice(stock.getInitialPrice());
-            userTransactions.setStockDetails(stock);
-            userTransactions.setIsSold(sTransaction.getIsSelling());
-            userTransactions.setUnits(sTransaction.getDesiredUnits());
-            userTransactionsRepository.save(userTransactions);
+            addTransaction(sTransaction,stock,userTransactions);
 
             if(sTransaction.getIsSelling())
             {
@@ -177,17 +174,32 @@ public class DataService {
 
             registrationRepository.save(user);
 
-            //Adding balance transaction to table.
-            BalanceTransaction balanceTransaction = new BalanceTransaction();
-            balanceTransaction.setCashValue(balanceRequired);
-            balanceTransaction.setUser(user);
-            balanceTransaction.setAddedDate(new Date());
-            balanceTransaction.setTopUp(false);
-            balanceTransaction.setAdded(sTransaction.getIsSelling());
-            balanceRepository.save(balanceTransaction);
+            updateBalance(balanceRequired,user,sTransaction);
             return userTransactions;
         }
         return null;
+    }
+
+    public UserTransactions addTransaction(ScheduledTransaction sTransaction,StockDetails stock,UserTransactions userTransactions){
+        userTransactions.setUser(sTransaction.getUser());
+        userTransactions.setTransactionDate(new Date());
+        userTransactions.setStockPrice(stock.getInitialPrice());
+        userTransactions.setStockDetails(stock);
+        userTransactions.setIsSold(sTransaction.getIsSelling());
+        userTransactions.setUnits(sTransaction.getDesiredUnits());
+        userTransactionsRepository.save(userTransactions);
+        return userTransactions;
+    }
+
+    public void updateBalance(float balanceRequired,User user,ScheduledTransaction sTransaction){
+        //Adding balance transaction to table.
+        BalanceTransaction balanceTransaction = new BalanceTransaction();
+        balanceTransaction.setCashValue(balanceRequired);
+        balanceTransaction.setUser(user);
+        balanceTransaction.setAddedDate(new Date());
+        balanceTransaction.setTopUp(false);
+        balanceTransaction.setAdded(sTransaction.getIsSelling());
+        balanceRepository.save(balanceTransaction);
     }
 
     public List<ScheduledTransaction> getAllScheduledTransactions() {

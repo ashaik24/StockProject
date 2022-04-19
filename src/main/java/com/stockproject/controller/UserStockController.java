@@ -13,11 +13,11 @@ import org.springframework.web.bind.annotation.*;
 import java.util.ArrayList;
 import java.util.List;
 
-@RestController
-@CrossOrigin(origins = "http://localhost:4200")
 /**
  * Handles all the stock related transactions for the user.
  */
+@RestController
+@CrossOrigin(origins = "http://localhost:4200")
 public class UserStockController {
     private DataService dataService;
     private AdminStockRepository adminStockRepository;

@@ -13,6 +13,7 @@ export class UtilityService{
   private admin = "is_admin";
   constructor(private dialog:MatDialog,private router:Router) {
   }
+
   isLoggedIn(){
     return this.getUser()!=null?true:false;
   }

@@ -52,12 +52,17 @@ public class BalanceService {
         user.setBalance(user.getBalance() - addMoney.getAmount());
         registrationRepository.save(user);
         return balanceTransaction;
-
     }
 
     public float getAvailableCash(String username) {
-        User user = getUserDetails(username);
-        return user.getBalance();
+        if(username.isEmpty() || username.isBlank()) {
+            return 0;
+        }
+        else {
+            User user = getUserDetails(username);
+            return user.getBalance();
+        }
+
     }
 
     public User getUserDetails(String username){

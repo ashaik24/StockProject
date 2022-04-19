@@ -21,7 +21,7 @@
         </tr>
         </thead>
         <tbody>
-        <tr *ngFor="let addedStocks of stocks; index as i" >
+        <tr *ngFor="let addedStocks of stocks; index as i">
           <th scope="row">{{i+1}}</th>
           <th>{{addedStocks.companyName}}</th>
           <td class="price">{{addedStocks.initialPrice | number:'1.3-3' | currency:'USD' }}
@@ -35,7 +35,7 @@
             {{addedStocks.startingPrice | number:'1.3-3' | currency:'USD' }}
           </td>
           <td>{{addedStocks.volume}}</td>
-          <td *ngIf="utilityService.isUser()"><button mat-raised-button (click)="buyStock(addedStocks)">Select</button></td>
+          <td *ngIf="utilityService.isUser()"><button [disabled]="addedStocks.volume==0" mat-raised-button (click)="buyStock(addedStocks)">Select</button></td>
         </tr>
         </tbody>
       </table>

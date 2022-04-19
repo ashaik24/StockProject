@@ -13,11 +13,11 @@ import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
 import java.util.*;
 
-@RestController
-@CrossOrigin(origins = "http://localhost:4200")
 /**
  * Handles all the admin related activities
  */
+@RestController
+@CrossOrigin(origins = "http://localhost:4200")
 public class AdminStockController {
 
     private AdminStockService adminStockService;

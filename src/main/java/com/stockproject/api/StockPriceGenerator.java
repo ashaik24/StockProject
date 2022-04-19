@@ -14,10 +14,12 @@ import java.util.concurrent.TimeUnit;
 
 @Service
 public class StockPriceGenerator {
+
     private final AdminStockRepository adminStockRepository;
     private final DataService dataService;
     private boolean isRunning = false;
     private int priceGenerationInterval = 1; //In seconds
+
     /**
      * This class handles random price generation for each stock while current time is a valid stock activity time
      * that admin defined.
@@ -63,7 +65,7 @@ public class StockPriceGenerator {
     {
         if(!isRunning)
         {
-            stock.resetBounds();;
+            stock.resetBounds();
         }
         stock.UpdateTargetPrice();
         stock.UpdateStockPrice();

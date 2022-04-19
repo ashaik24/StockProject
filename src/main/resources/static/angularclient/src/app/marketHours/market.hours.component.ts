@@ -1,12 +1,12 @@
 import {Component, Injectable} from '@angular/core';
-import {MarketHours} from "../classes/MarketHours";
+import {MarketHours} from "../dataObjects/MarketHours";
 import {DataService} from "../services/data.service";
 import {UtilityService} from "../services/utility.service";
 
 @Component({
   selector: 'market-hours',
   templateUrl: './market.hours.component.html',
-  styleUrls: ['../AdminStockDashboard/admindashboard.component.css'],
+  styleUrls: ['../adminStockDashboard/admindashboard.component.css'],
 })
 
 export class MarketHoursComponent {
@@ -16,6 +16,7 @@ export class MarketHoursComponent {
       this.marketHours = new MarketHours();
       this.dataService.getMarketHours().subscribe((response:any)=>
       {
+          console.log("Current market hours ", response);
           this.setMarketHours(response,false)
       })
     }

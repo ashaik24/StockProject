@@ -1,6 +1,6 @@
 import {Component, Injectable} from '@angular/core';
 import {HttpClient,HttpParams,HttpHeaders} from "@angular/common/http";
-import {User} from "../classes/User";
+import {User} from "../dataObjects/User";
 import { Observable, throwError } from 'rxjs';
 import { map, catchError} from 'rxjs/operators';
 import {EncryptDecryptService} from "../services/encrypt-decrypt.service";
@@ -24,8 +24,6 @@ export class RegisterComponent {
     this.user = new User();
   }
 
-
-
   registerUser(){
 
     let error_title = "Invalid Input";
@@ -46,11 +44,9 @@ export class RegisterComponent {
       response => {
         let dialog_title = "User already exists!!";
         let dialog_content = "User details given already exists! Do you want to login?"
-        let user_exists = true;
         let success = false;
-        let dialog : MatDialogRef<any>;
+        let dialog !: MatDialogRef<any>;
         if(response == null) {
-          user_exists = false;
           if (this.retype == this.password)
           {
             this.user.password = this._encryptDecrypt.encrypt(this.password);
@@ -58,28 +54,31 @@ export class RegisterComponent {
               dialog_title = "Success";
               dialog_content = "Registered successfully !!";
               success = true;
-              dialog = this.utilityService.showDialog(dialog_title,dialog_content,"close",user_exists?"login":null);
+              dialog = this.utilityService.showDialog(dialog_title,dialog_content,"close","login");
+              dialog.afterClosed().subscribe((result)=>
+              {
+                this.utilityService.redirectTo('login').then(()=>{});
+              });
             });
           }
           else
           {
             dialog_title = "Password mismatch";
             dialog_content = "Password and retype password doesn't match";
-            dialog = this.utilityService.showDialog(dialog_title,dialog_content,"close",user_exists?"login":null);
+            dialog = this.utilityService.showDialog(dialog_title,dialog_content,"close");
           }
         }
         else {
-          dialog = this.utilityService.showDialog(dialog_title,dialog_content,"close",user_exists?"login":null);
+          dialog = this.utilityService.showDialog(dialog_title,dialog_content,"close","login");
+          dialog.afterClosed().subscribe((result)=>
+          {
+            if(result) {
+              this.utilityService.redirectTo('login').then(() => {
+              });
+            }
+          });
         }
 
-
-        // @ts-ignore
-        dialog.afterClosed().subscribe((result: any) => {
-          if(success || (user_exists && result))
-          {
-            this.utilityService.redirectTo('login').then(()=>{});
-          }
-        });
       });
 
   }

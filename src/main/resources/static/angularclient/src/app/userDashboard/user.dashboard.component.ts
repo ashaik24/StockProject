@@ -1,5 +1,5 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {Stock} from "../classes/Stock";
+import {Stock} from "../dataObjects/Stock";
 import {Router} from "@angular/router";
 import {UtilityService} from "../services/utility.service";
 import {DataService} from "../services/data.service";
@@ -19,14 +19,10 @@ export class UserDashboardComponent implements OnInit{
   constructor(private dataService:DataService,private router:Router,public utilityService:UtilityService) {
     this.stock = new Stock();
     this.getCurrentBalance();
-    setInterval(()=>{
-        this.getCurrentBalance();
-    },1000);
   }
 
   ngOnInit(): void {
-    this.updateStocks();
-    setInterval(()=>{this.updateStocks()},1000)
+    this.getStocks();
   }
 
   increase(stock:any)
@@ -34,8 +30,8 @@ export class UserDashboardComponent implements OnInit{
     return stock.initialPrice < stock.targetPrice;
   }
 
-  updateStocks(){
-    this.dataService.getStocks().subscribe((response)=>{
+  getStocks(){
+    this.dataService.stocksObserver.subscribe((response)=>{
       this.stocks = response;
     })
   }
@@ -43,7 +39,7 @@ export class UserDashboardComponent implements OnInit{
   getCurrentBalance()
   {
     if(this.utilityService.isLoggedIn() && this.utilityService.isUser()) {
-      this.dataService.getUserBalance(this.utilityService.getUser()).subscribe(
+      this.dataService.userBalanceObserver.subscribe(
         (response) => {
           this.availableBalance = <any>response;
         })

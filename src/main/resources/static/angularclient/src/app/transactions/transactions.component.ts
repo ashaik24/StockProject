@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {UserTransaction} from "../classes/UserTransaction";
+import {UserTransaction} from "../dataObjects/UserTransaction";
 import {DataService} from "../services/data.service";
 import {UtilityService} from "../services/utility.service";
 
@@ -7,7 +7,7 @@ import {UtilityService} from "../services/utility.service";
 @Component({
   selector: 'transaction-component',
   templateUrl: 'transactions.component.html',
-  styleUrls: ['../UserDashboard/user.dashboard.component.css'],
+  styleUrls: ['../userDashboard/user.dashboard.component.css'],
 })
 export class TransactionsComponent implements OnInit {
 

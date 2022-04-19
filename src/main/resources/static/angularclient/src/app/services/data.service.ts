@@ -1,15 +1,16 @@
-import {Injectable} from "@angular/core";
-import {Stock} from "../classes/Stock";
+import {Injectable, OnInit} from "@angular/core";
+import {Stock} from "../dataObjects/Stock";
 import {HttpClient, HttpHeaders} from "@angular/common/http";
-import {MarketHours} from "../classes/MarketHours";
+import {MarketHours} from "../dataObjects/MarketHours";
+import {Observable, Observer} from "rxjs";
+import {UtilityService} from "./utility.service";
+import {addFontsToIndex} from "@angular/material/schematics/ng-add/fonts/material-fonts";
 
 @Injectable({
   providedIn: 'root'
 })
-export class DataService {
+export class DataService{
 
-  constructor(private http:HttpClient) {
-  }
   private hostAddress : string = "http://localhost:8080/";
   private addStocksUrl : string = 'addStocks';
   private getStocksUrl : string = 'getStocks';
@@ -25,6 +26,35 @@ export class DataService {
   private updateMarketHoursUrl : string = 'updateMarketHours';
   private getUserScheduledTransactionsUrl :string = 'getUserScheduledTransactions';
   private deleteScheduledTransactionUrl: string = 'deleteScheduledTransaction';
+
+  stocksObserver: Observable<Stock[]> = new Observable<Stock[]>((stocks)=>{
+      this.setIntervalWithoutDelay(()=>{
+        this.getStocks().subscribe((httpStocks)=>{
+          stocks.next(<Stock[]>httpStocks);
+        })
+      },1000);
+  });
+
+  setIntervalWithoutDelay(func:any,interval:number)
+  {
+    func();
+    return setInterval(func,interval);
+  }
+
+  userBalanceObserver : Observable<number> = new Observable<number>((balance)=>{
+      this.setIntervalWithoutDelay(() => {
+        if(this.utilityService.isUser()) {
+          this.getUserBalance(this.utilityService.getUser()).subscribe((httpBalance) => {
+            balance.next(<number>httpBalance);
+          })
+        }
+      }, 1000);
+  });
+
+  constructor(private http:HttpClient, private utilityService:UtilityService) {
+
+  }
+
   private headers = new HttpHeaders()
     .append(
       'Content-Type',
@@ -117,4 +147,6 @@ export class DataService {
   deleteScheduledTransaction(id: any) {
     return this.basicGetWithParameter(this.deleteScheduledTransactionUrl,id);
   }
+
+
 }

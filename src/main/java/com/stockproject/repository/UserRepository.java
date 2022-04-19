@@ -8,7 +8,6 @@ import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 @Repository
-@EnableJpaRepositories()
 public interface UserRepository extends JpaRepository<User,Integer> {
     @Query("select u from User u where u.username = :username")
     public User findByUsername(@Param("username") String username);

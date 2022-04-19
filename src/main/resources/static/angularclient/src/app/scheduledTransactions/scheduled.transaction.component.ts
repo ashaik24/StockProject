@@ -1,13 +1,12 @@
 import {Component, OnInit} from '@angular/core';
-import {UserTransaction} from "../classes/UserTransaction";
 import {DataService} from "../services/data.service";
 import {UtilityService} from "../services/utility.service";
-import {ScheduledTransaction} from "../classes/ScheduledTransaction";
+import {ScheduledTransaction} from "../dataObjects/ScheduledTransaction";
 
 @Component({
   selector: 'scheduled-transaction-component',
   templateUrl: 'scheduled.transaction.component.html',
-  styleUrls: ['../UserDashboard/user.dashboard.component.css'],
+  styleUrls: ['../userDashboard/user.dashboard.component.css'],
 })
 export class ScheduledTransactionComponent implements OnInit {
 

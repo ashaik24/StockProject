@@ -1,10 +1,8 @@
 import { Component } from '@angular/core';
-import {User} from "../classes/User";
-import {Router} from "@angular/router";
+import {User} from "../dataObjects/User";
 import { EncryptDecryptService } from '../services/encrypt-decrypt.service';
 import {DataService} from "../services/data.service";
 import {UtilityService} from "../services/utility.service";
-
 
 @Component({
   selector: 'login-form',

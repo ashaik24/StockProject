@@ -3,7 +3,7 @@
   <div class="center col-sm-8">
     <h1 style="color: #429342">{{availableBalance | number |currency:'USD'}}</h1>
   </div>
-  <div class="col-sm-4" >
+  <div class="col-sm-4" style="padding-left: 300px;">
     <button mat-raised-button  (click)="openModal(template)" >Add Money</button>
     <div class="space" style="width: 15px"></div>
     <button mat-raised-button class="delete-button"  (click)="openModal(withdrawtemplate)">Withdraw Money</button>

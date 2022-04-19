@@ -1,5 +1,5 @@
 import {Component, EventEmitter, Input, Output} from "@angular/core";
-import {Stock} from "../classes/Stock";
+import {Stock} from "../dataObjects/Stock";
 import {DataService} from "../services/data.service";
 import {UtilityService} from "../services/utility.service";
 
@@ -28,7 +28,6 @@ export class StockTransactionComponent {
   currentPrice!:number;
 
   constructor(private dataService:DataService,private utilityService:UtilityService) {
-    //this.stock = this.router.getCurrentNavigation()?.extras.state as Stock;
     this.units=0;
     if(this.currentStock != null)
       this.desiredPrice = this.currentStock.initialPrice;

@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {Stock} from "../classes/Stock";
+import {Stock} from "../dataObjects/Stock";
 import {DataService} from "../services/data.service";
 import {UtilityService} from "../services/utility.service";
 import {repeat} from "rxjs";
@@ -16,9 +16,7 @@ export class AdmindashboardComponent implements OnInit{
   stocks:any;
   constructor(private dataService:DataService,private utilityService:UtilityService) {
     this.stock = new Stock();
-    setInterval(()=>{
-      this.getUpdatedStocks();
-    },1000);
+    this.getUpdatedStocks();
   }
 
   addStock(){
@@ -42,7 +40,7 @@ export class AdmindashboardComponent implements OnInit{
 
   getUpdatedStocks()
   {
-    this.dataService.getStocks().subscribe(response => {
+    this.dataService.stocksObserver.subscribe(response => {
       this.stocks = response;
     });
   }

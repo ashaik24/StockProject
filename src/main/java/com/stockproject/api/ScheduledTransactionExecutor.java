@@ -18,6 +18,7 @@ public class ScheduledTransactionExecutor {
 
     private final DataService dataService;
     private final int checkingTimeInterval = 1; // In seconds
+
     @Autowired
     public ScheduledTransactionExecutor(DataService dataService) {
         this.dataService = dataService;
